@@ -140,18 +140,6 @@ To replace `<ACCOUNT_ID>` with a **account number** (e.g., `123456789012`) using
 ```bash
 sed -i 's/<ACCOUNT_ID>/123456789012/g' config.yaml
 ```
-
-### Explanation of the Command:
-- `sed`: The stream editor for performing text transformations.
-- `-i`: Edits the file **in place**, modifying the original file directly.
-- `'s/<ACCOUNT_ID>/123456789012/g'`: The substitution expression:
-  - `s`: Stands for **substitute**.
-  - `<ACCOUNT_ID>`: The text you want to replace.
-  - `123456789012`: The account number that will replace `<ACCOUNT_ID>`.
-  - `g`: **Globally** replace all occurrences in the file (not just the first one).
-- `config.yaml`: The name of the file where the substitution will take place.
-
-
 ### 2. **Verify the Changes**:
 After running the `sed` command, verify that the replacement has been made:
 
