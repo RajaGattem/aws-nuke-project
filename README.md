@@ -133,7 +133,40 @@ resource-types:
 accounts:
   "<ACCOUNT_ID>": {}  # Replace with the actual AWS account ID
 ```
+To replace `<ACCOUNT_ID>` with a **dummy account number** (e.g., `123456789012`) using `sed`, you can modify the `sed` command like this:
 
+### 1. **Basic Command to Replace with Dummy Account Number**:
+
+```bash
+sed -i 's/<ACCOUNT_ID>/123456789012/g' config.yaml
+```
+
+### Explanation of the Command:
+- `sed`: The stream editor for performing text transformations.
+- `-i`: Edits the file **in place**, modifying the original file directly.
+- `'s/<ACCOUNT_ID>/123456789012/g'`: The substitution expression:
+  - `s`: Stands for **substitute**.
+  - `<ACCOUNT_ID>`: The text you want to replace.
+  - `123456789012`: The dummy account number that will replace `<ACCOUNT_ID>`.
+  - `g`: **Globally** replace all occurrences in the file (not just the first one).
+- `config.yaml`: The name of the file where the substitution will take place.
+
+
+### 2. **Verify the Changes**:
+After running the `sed` command, verify that the replacement has been made:
+
+```bash
+cat config.yaml
+```
+
+This will print the contents of the file, where you should see `<ACCOUNT_ID>` replaced with `123456789012`.
+
+### Summary:
+- **Replace `<ACCOUNT_ID>` with a dummy account number**: Use `sed -i 's/<ACCOUNT_ID>/123456789012/g' config.yaml`.
+- **Backup before modification**: Use `sed -i.bak` to create a backup file (`config.yaml.bak`).
+- **Verify changes**: Use `cat config.yaml` to confirm the changes.
+
+Let me know if you need further assistance!
 #### Key Sections:
 - **regions**: Specifies which AWS regions to target for resource deletion.
 - **account-blocklist**: A list of AWS account IDs to exclude from deletion (for safety).
