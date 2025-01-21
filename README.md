@@ -85,26 +85,22 @@ You should see the help menu, confirming the installation.
 
 To configure AWS Nuke, you must create a `config.yaml` file that defines the regions and resources to target for deletion.
 
-### Sample `config.yaml`:
+To modify the `config.yaml` file using `vim`, follow these steps:
 
-```yaml
-regions:
-  - "ap-south-1"
-  - "global"  # Resources like IAM, CloudFront, etc.
+1. **Navigate to the cloned repository directory**:
+   If you haven't already cloned the repository, first clone it using:
 
-account-blocklist:
-  - 123456789101  # Exclude specific accounts (e.g., production accounts).
+   ```bash
+   git clone https://github.com/RajaGattem/aws-nuke-project.git
+   cd aws-nuke-project
+   ```
 
-resource-types:
-  excludes:
-    - IAMUser
-    - IAMGroup
-    - IAMPolicy
-    - IAMRole
-    - IAMInstanceProfile
+2. **Open the `config.yaml` file in `vim`**:
+   Run the following command to open the file in `vim`:
 
-accounts:
-  "<ACCOUNT_ID>": {}  # Replace with the actual AWS account ID
+   ```bash
+   vim config.yaml
+   ```
 ```
 
 #### Key Sections:
