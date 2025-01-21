@@ -1,19 +1,20 @@
-regions:                      #aws-nuke will look for and remove resources in these specified regions.
-  #  - "ap-south-1"
-  - "global"                  # Resources like global services - cloud front,IAM
-  - "us-east-1"
-account-blocklist:            #mandatory* leave as it is.
-- "123456789101"                # e.g production account
+regions:
+#aws-nuke will look for and remove resources in these specified regions.
+  - "ap-south-1"
+  - "global" # Resources like global services - cloud front,IAM
+account-blocklist: #mandatory* leave as it is.
+#Accounts you dont want to delete the resources
+- 123456789101 # e.g production account
 
-resource-types:               #not mandatory
+resource-types: #not mandatory
   #targets:
-                              # Specific resources you want to remove 
+  # Specific resources you want to remove 
   #- S3Object
   #- S3Bucket
   #- EC2Volume
   
-  excludes:                   #not mandatory
-                              # Specific resources to exclude from deletion
+  excludes: #not mandatory
+  # Specific resources to exclude from deletion
   - IAMUser
   - IAMGroup
   - IAMRun
@@ -47,4 +48,7 @@ resource-types:               #not mandatory
   - IAMUserAccessKey                                       
   - IAMOpenIDConnectProvider
 accounts:
-  "676206899925" : {} #Replace with accountID && {} it will apply to all-res
+  “<ACCOUNT_ID>” : {} #Replace with accountID && {} it will apply to all-res
+
+
+
