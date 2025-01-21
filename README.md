@@ -1,127 +1,158 @@
----
+aws-nuke 
 
-# AWS Nuke Project: Importance and Documentation
+WARNING: 
+DO NOT run aws nuke against a production environment. The result of running aws-nuke against an account can be destructive! 
+I recommend only using it to clean up dev/test accounts where you don’t mind deleting all resources.
 
-## Project Importance
+Pre-requisites
+A Linux system with AWS CLI installed. 
 
-**AWS Nuke** is a critical tool for managing and cleaning up AWS environments. It is designed to remove all resources in an AWS account to facilitate a clean slate for reorganization, testing, or decommissioning of an environment. The importance of AWS Nuke can be summarized in the following points:
+aws-nuke repository — https://github.com/rebuy-de/aws-nuke (-- References Only )
 
-### 1. **Efficient Resource Cleanup**
-   - AWS accounts can quickly accumulate resources over time—whether through testing, experimentation, or even accidental deployments. AWS Nuke automates the cleanup process, ensuring that all unused resources are removed efficiently, saving time and reducing the risk of human error.
+Configure the AWS CLI profile for AWS Nuke
 
-### 2. **Cost Management**
-   - Leaving resources (such as EC2 instances, S3 buckets, RDS databases, etc.) running without proper management can result in significant costs. AWS Nuke helps organizations cut down on cloud costs by ensuring that all unused or unnecessary resources are quickly identified and removed.
+Step 1: Generate the Access Key ID and Secret Access Key from the AWS IAM Console.
+Step 2: Configure the AWS CLI with these credentials using the terminal by running 
+aws configure and entering the Access Key ID and Secret Access Key when prompted.
 
-### 3. **Environment Reset**
-   - In development and testing environments, it is often necessary to reset the account to a pristine state. AWS Nuke helps facilitate this by wiping all resources, allowing teams to start fresh without the overhead of manually removing individual components.
+#configure the aws cli
+aws configure --profile <profile-name> #Replace with name LIKE fission-nuke
 
-### 4. **Safety and Security**
-   - In some cases, sensitive data or outdated resources can pose a security risk. By using AWS Nuke to remove all resources, organizations can prevent accidental exposure or access to outdated services.
 
-### 5. **Automation and Integration**
-   - AWS Nuke can be integrated into CI/CD pipelines and used alongside other AWS automation tools, making it a valuable addition to modern cloud-native infrastructure management.
 
-## Documentation
+Download and Install aws-nuke
+## Download aws-nuke from github
+wget -c https://github.com/rebuy-de/aws-nuke/releases/download/v2.16.0/aws-nuke-v2.16.0-linux-amd64.tar.gz
 
-### Overview
-AWS Nuke is a command-line tool designed to delete all resources in an AWS account. It is designed to operate on all AWS services, offering a comprehensive approach to resource cleanup. 
+## Extract the aws-nuke binary
+tar -xvf aws-nuke-v2.16.0-linux-amd64.tar.gz
 
-### Prerequisites
-Before using AWS Nuke, you must meet the following prerequisites:
-- **AWS CLI**: Ensure that you have AWS CLI installed and configured with appropriate permissions. AWS Nuke uses your AWS credentials to interact with your AWS account.
-- **IAM Permissions**: The user running AWS Nuke must have full administrative permissions in the AWS account to delete resources. Ensure the IAM user or role has the following policies:
-  - `AdministratorAccess`
-  - Permissions for service-specific resources you intend to delete (optional for fine-grained control).
+
+## Rename the extracted binary to aws-nuke
+mv aws-nuke-v2.16.0-linux-amd64 aws-nuke
+
+
+## Copy the extracted binary to your $PATH
+sudo mv aws-nuke /usr/local/bin/aws-nuke
+
+
+## Validate
+aws-nuke -h
+
+
+
+Configure AWS Nuke
+
+-- Need to write config.yaml file to destroy all resources
+AWS Nuke explicitly targets resources in the regions defined under regions.
+Adding "global" ensures resources from global services (e.g., IAM, CloudFront) are included in the cleanup process.
+If you do not include a region where a resource exists, that resource will not be deleted, maintaining safety by default.
+
+config.yaml : 
+vim config.yml
+
+
+regions:
+#aws-nuke will look for and remove resources in these specified regions.
+  - "ap-south-1"
+  - "global" # Resources like global services - cloud front,IAM
+account-blocklist: #mandatory* leave as it is.
+#Accounts you dont want to delete the resources
+- 123456789101 # e.g production account
+
+resource-types: #not mandatory
+  #targets:
+  # Specific resources you want to remove 
+  #- S3Object
+  #- S3Bucket
+  #- EC2Volume
   
-### Installation
+  excludes: #not mandatory
+  # Specific resources to exclude from deletion
+  - IAMUser
+  - IAMGroup
+  - IAMRun
+  - IAMPolicy
+  - IAMGroup                                               
+  - IAMUserPolicyAttachment                                
+  - IAMGroupPolicy                                         
+  - IAMRolesAnywhereProfile                                
+  - IAMRolePolicyAttachment                                
+  - IAMInstanceProfileRole                                 
+  - IAMSAMLProvider                                        
+  - IAMRolePolicy                                          
+  - IAMUserHTTPSGitCredential                              
+  - IAMRolesAnywhereCRL                                    
+  - IAMServerCertificate                                   
+  - IAMVirtualMFADevice                                    
+  - IAMUserMFADevice                                       
+  - IAMRole                                                
+  - IAMInstanceProfile                                     
+  - IAMLoginProfile                                        
+  - IAMRolesAnywhereTrustAnchor                            
+  - IAMAccountSettingPasswordPolicy                        
+  - IAMServiceSpecificCredential                           
+  - IAMUser                                                
+  - IAMGroupPolicyAttachment                               
+  - IAMUserPolicy                                          
+  - IAMPolicy                                              
+  - IAMUserGroupAttachment                                 
+  - IAMUserSSHPublicKey                                    
+  - IAMSigningCertificate                                  
+  - IAMUserAccessKey                                       
+  - IAMOpenIDConnectProvider
+accounts:
+  “<ACCOUNT_ID>” : {} #Replace with accountID && {} it will apply to all-res
 
-1. **Download and Install AWS Nuke**
 
-   AWS Nuke can be installed via `go get` if you're using Go, or you can use precompiled binaries from the official repository.
 
-   For Go:
-   ```bash
-   go get -u github.com/rebuy-de/aws-nuke
-   ```
 
-   For Precompiled Binaries:
-   - Download the latest release from the [AWS Nuke releases page](https://github.com/rebuy-de/aws-nuke/releases).
-   - Unzip and move the binary to a directory in your system's PATH.
 
-### Configuration
+ 
+Note : 
+Command to get all resource-types  $ aws-nuke resource-types
+Exclude : 
+ Specific resources to exclude from deletion
 
-AWS Nuke uses a configuration file (`config.yaml`) to specify which AWS services to target and any additional parameters.
+Destroy all resources in your AWS account using aws-nuke
 
-1. **Create a configuration file**:
-   ```yaml
-   regions:
-     - us-west-1
-     - eu-central-1
+Commands : 
 
-   resources:
-     EC2: true
-     S3: true
-     RDS: true
-     VPC: true
-     Lambda: true
-     IAM: true
-   ```
+Before running the aws-nuke command, ensure your AWS account alias is set up correctly:
+Go to the IAM Dashboard
+Navigate to the Aws Account Alias Section
+Create or Edit the Alias –
 
-   - The `regions` section defines which AWS regions AWS Nuke should target.
-   - The `resources` section defines which AWS resources to remove (set to `true` to target the resource, `false` to skip).
+Verify the nuke ,with alias
+We Got an error like this -- if alias is not specified
 
-2. **Test Configuration**: It's recommended to run AWS Nuke in **dry-run mode** before executing any deletions:
-   ```bash
-   aws-nuke -c config.yaml --no-dry-run
-   ```
 
-   This will simulate the deletion process without actually removing any resources.
+# To destroy the resources run this command 
+aws-nuke run --config config.yaml --profile fission-nuke --no-dry-run
 
-### Usage
 
-1. **Run AWS Nuke**:
-   Once your configuration is set, you can execute AWS Nuke with the following command:
-   ```bash
-   aws-nuke -c config.yaml
-   ```
 
-   This will delete all resources defined in your configuration file across the specified regions.
+ Give account alias name
+After verification, AWS Nuke will automatically delete the resources. Verify whether the resources have been completely destroyed.
 
-2. **Logging and Output**:
-   - By default, AWS Nuke will log output to the terminal. You can redirect output to a log file for tracking purposes:
-     ```bash
-     aws-nuke -c config.yaml > nuke_log.txt
-     ```
 
-3. **Additional Flags**:
-   - `--no-dry-run`: This flag is required to actually delete the resources. Without this flag, AWS Nuke will only simulate the deletions.
-   - `--profile`: If you are using multiple AWS profiles, specify which one to use:
-     ```bash
-     aws-nuke -c config.yaml --profile my-profile
-     ```
+ 
 
-### Safety Considerations
 
-- **Critical Operation**: AWS Nuke deletes all resources in an AWS account. Please use it carefully and ensure that you are targeting the correct regions and resources.
-- **Backups**: Ensure that you have backups of important data (e.g., S3 objects, databases) before using AWS Nuke.
-- **Dry-Run Mode**: Always test in dry-run mode to ensure that your configuration is correct before performing any deletions.
 
-### Contributing
 
-AWS Nuke is an open-source project, and contributions are welcome! To contribute:
 
-1. Fork the repository.
-2. Create a new branch for your feature or bug fix.
-3. Make your changes and write tests if applicable.
-4. Submit a pull request with a clear description of your changes.
 
-For more detailed information, refer to the official repository: [AWS Nuke GitHub Repository](https://github.com/rebuy-de/aws-nuke).
+Future Reference Only for more actions:  Example for destroy all resources
+## Download sample config file or below Their is a sample file
+curl https://raw.githubusercontent.com/davidokeyode/aws-offensive/main/nuke-config.yml -o nuke-config.yml
+## Edit the file as needed - Modify the account ID placeholder and regions
+accounts:
+  "<ACCOUNT_ID>": {} # aws-nuke-example
+## More configuration info/examples for aws-nuke can be found in the main repository here: https://github.com/rebuy-de/aws-nuke
 
----
 
-### Conclusion
-The **AWS Nuke** project plays a crucial role in simplifying AWS resource management, especially in large-scale environments, by automating the cleanup process and ensuring efficient cost and security management. The tool is highly beneficial for teams managing cloud environments that require periodic resets or cost optimization.
 
---- 
 
-Feel free to adapt and extend this documentation as per your project's specific needs!
+
+
