@@ -151,12 +151,6 @@ cat config.yaml
 
 This will print the contents of the file, where you should see `<ACCOUNT_ID>` replaced with `123456789012`.
 
-### Summary:
-- **Replace `<ACCOUNT_ID>` with a  account number**: Use `sed -i 's/<ACCOUNT_ID>/123456789012/g' config.yaml`.
-- **Backup before modification**: Use `sed -i.bak` to create a backup file (`config.yaml.bak`).
-- **Verify changes**: Use `cat config.yaml` to confirm the changes.
-
-Let me know if you need further assistance!
 #### Key Sections:
 - **regions**: Specifies which AWS regions to target for resource deletion.
 - **account-blocklist**: A list of AWS account IDs to exclude from deletion (for safety).
