@@ -182,6 +182,7 @@ Before actually deleting any resources, it's a good practice to simulate the del
 ```bash
 aws-nuke run --config config.yaml --profile <profile-name> --no-dry-run
 ```
+![Image](https://github.com/user-attachments/assets/9f8039aa-7882-4d53-b51d-815b1129dcec)
 
 ### 2. **Run AWS Nuke (Destructive Mode)**
 
