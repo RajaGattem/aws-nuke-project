@@ -1,3 +1,7 @@
+Here's an example of how to structure the **README** file for the **AWS Nuke** project on GitHub. This version includes installation instructions, usage guidelines, safety warnings, and configuration steps, written in a clear and structured way.
+
+---
+
 # AWS Nuke
 
 **AWS Nuke** is a command-line tool that helps you delete all resources in an AWS account. It is designed for cleaning up AWS environments, such as development or test accounts, where you want to remove all resources and start fresh. **Warning**: Do not run AWS Nuke on production accounts or environments, as it will irreversibly delete all resources in the specified account and regions.
@@ -85,22 +89,26 @@ You should see the help menu, confirming the installation.
 
 To configure AWS Nuke, you must create a `config.yaml` file that defines the regions and resources to target for deletion.
 
-To modify the `config.yaml` file using `vim`, follow these steps:
+### Sample `config.yaml`:
 
-1. **Navigate to the cloned repository directory**:
-   If you haven't already cloned the repository, first clone it using:
+```yaml
+regions:
+  - "ap-south-1"
+  - "global"  # Resources like IAM, CloudFront, etc.
 
-   ```bash
-   git clone https://github.com/RajaGattem/aws-nuke-project.git
-   cd aws-nuke-project
-   ```
+account-blocklist:
+  - 123456789101  # Exclude specific accounts (e.g., production accounts).
 
-2. **Open the `config.yaml` file in `vim`**:
-   Run the following command to open the file in `vim`:
+resource-types:
+  excludes:
+    - IAMUser
+    - IAMGroup
+    - IAMPolicy
+    - IAMRole
+    - IAMInstanceProfile
 
-   ```bash
-   vim config.yaml
-   ```
+accounts:
+  "<ACCOUNT_ID>": {}  # Replace with the actual AWS account ID
 ```
 
 #### Key Sections:
