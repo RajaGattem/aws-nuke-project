@@ -1,7 +1,3 @@
-Here's an example of how to structure the **README** file for the **AWS Nuke** project on GitHub. This version includes installation instructions, usage guidelines, safety warnings, and configuration steps, written in a clear and structured way.
-
----
-
 # AWS Nuke
 
 **AWS Nuke** is a command-line tool that helps you delete all resources in an AWS account. It is designed for cleaning up AWS environments, such as development or test accounts, where you want to remove all resources and start fresh. **Warning**: Do not run AWS Nuke on production accounts or environments, as it will irreversibly delete all resources in the specified account and regions.
@@ -195,4 +191,3 @@ AWS Nuke is licensed under the **MIT License**. See [LICENSE](LICENSE) for more 
 
 ---
 
-This README should guide users through the installation, configuration, and use of **AWS Nuke** to clean up AWS resources in a safe and efficient way.
