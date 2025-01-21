@@ -1,0 +1,50 @@
+regions:                      #aws-nuke will look for and remove resources in these specified regions.
+  #  - "ap-south-1"
+  - "global"                  # Resources like global services - cloud front,IAM
+  - "us-east-1"
+account-blocklist:            #mandatory* leave as it is.
+- "123456789101"                # e.g production account
+
+resource-types:               #not mandatory
+  #targets:
+                              # Specific resources you want to remove 
+  #- S3Object
+  #- S3Bucket
+  #- EC2Volume
+  
+  excludes:                   #not mandatory
+                              # Specific resources to exclude from deletion
+  - IAMUser
+  - IAMGroup
+  - IAMRun
+  - IAMPolicy
+  - IAMGroup                                               
+  - IAMUserPolicyAttachment                                
+  - IAMGroupPolicy                                         
+  - IAMRolesAnywhereProfile                                
+  - IAMRolePolicyAttachment                                
+  - IAMInstanceProfileRole                                 
+  - IAMSAMLProvider                                        
+  - IAMRolePolicy                                          
+  - IAMUserHTTPSGitCredential                              
+  - IAMRolesAnywhereCRL                                    
+  - IAMServerCertificate                                   
+  - IAMVirtualMFADevice                                    
+  - IAMUserMFADevice                                       
+  - IAMRole                                                
+  - IAMInstanceProfile                                     
+  - IAMLoginProfile                                        
+  - IAMRolesAnywhereTrustAnchor                            
+  - IAMAccountSettingPasswordPolicy                        
+  - IAMServiceSpecificCredential                           
+  - IAMUser                                                
+  - IAMGroupPolicyAttachment                               
+  - IAMUserPolicy                                          
+  - IAMPolicy                                              
+  - IAMUserGroupAttachment                                 
+  - IAMUserSSHPublicKey                                    
+  - IAMSigningCertificate                                  
+  - IAMUserAccessKey                                       
+  - IAMOpenIDConnectProvider
+accounts:
+  "676206899925" : {} #Replace with accountID && {} it will apply to all-res
