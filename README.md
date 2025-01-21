@@ -85,7 +85,6 @@ You should see the help menu, confirming the installation.
 
 To configure AWS Nuke, you must create a `config.yaml` file that defines the regions and resources to target for deletion.
 
-The instructions you've provided are correct for cloning the repository and accessing the `config.yaml` file. Here’s a more detailed breakdown:
 
 1. **Clone the GitHub repository:**
    To clone the repository to your local machine, run the following command in your terminal:
@@ -109,16 +108,15 @@ The instructions you've provided are correct for cloning the repository and acce
 For example:
 
    ```bash
-   nano config.yaml
+   vim config.yaml
    ```
 
-Let me know if you need further assistance!
 
 ### Sample `config.yaml`:
 
 ```yaml
 regions:
-  - "ap-south-1"
+  - "us-east-1"
   - "global"  # Resources like IAM, CloudFront, etc.
 
 account-blocklist:
