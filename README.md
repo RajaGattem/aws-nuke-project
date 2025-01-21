@@ -46,6 +46,8 @@ aws configure --profile <profile-name>
 ```
 Replace `<profile-name>` with a name of your choosing, such as `fission-nuke`.
 
+![Image](https://github.com/user-attachments/assets/af11251b-3a3f-4935-86b3-96d8aebe607a)
+
 ### 2. **Download AWS Nuke**
 
 To download AWS Nuke, use `wget` or your preferred method to fetch the latest release:
