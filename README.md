@@ -133,9 +133,9 @@ resource-types:
 accounts:
   "<ACCOUNT_ID>": {}  # Replace with the actual AWS account ID
 ```
-To replace `<ACCOUNT_ID>` with a **dummy account number** (e.g., `123456789012`) using `sed`, you can modify the `sed` command like this:
+To replace `<ACCOUNT_ID>` with a **account number** (e.g., `123456789012`) using `sed`, you can modify the `sed` command like this:
 
-### 1. **Basic Command to Replace with Dummy Account Number**:
+### 1. **Basic Command to Replace with Account Number**:
 
 ```bash
 sed -i 's/<ACCOUNT_ID>/123456789012/g' config.yaml
@@ -147,7 +147,7 @@ sed -i 's/<ACCOUNT_ID>/123456789012/g' config.yaml
 - `'s/<ACCOUNT_ID>/123456789012/g'`: The substitution expression:
   - `s`: Stands for **substitute**.
   - `<ACCOUNT_ID>`: The text you want to replace.
-  - `123456789012`: The dummy account number that will replace `<ACCOUNT_ID>`.
+  - `123456789012`: The account number that will replace `<ACCOUNT_ID>`.
   - `g`: **Globally** replace all occurrences in the file (not just the first one).
 - `config.yaml`: The name of the file where the substitution will take place.
 
@@ -162,7 +162,7 @@ cat config.yaml
 This will print the contents of the file, where you should see `<ACCOUNT_ID>` replaced with `123456789012`.
 
 ### Summary:
-- **Replace `<ACCOUNT_ID>` with a dummy account number**: Use `sed -i 's/<ACCOUNT_ID>/123456789012/g' config.yaml`.
+- **Replace `<ACCOUNT_ID>` with a  account number**: Use `sed -i 's/<ACCOUNT_ID>/123456789012/g' config.yaml`.
 - **Backup before modification**: Use `sed -i.bak` to create a backup file (`config.yaml.bak`).
 - **Verify changes**: Use `cat config.yaml` to confirm the changes.
 
