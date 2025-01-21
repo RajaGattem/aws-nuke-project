@@ -201,9 +201,11 @@ The `--no-dry-run` flag is necessary to actually delete the resources. **Make su
 To delete all resources in your AWS account:
 
 1. Ensure that your AWS account alias is properly set.
-   ![Image](https://github.com/user-attachments/assets/bc57dcb7-ac67-4ff2-8a25-59b0c2a7fabb)
-3. Verify that your `config.yaml` file is correctly configured.
-4. Run the AWS Nuke command to delete resources as described in the **Usage** section.
+
+![Image](https://github.com/user-attachments/assets/bc57dcb7-ac67-4ff2-8a25-59b0c2a7fabb)
+
+2. Verify that your `config.yaml` file is correctly configured.
+3. Run the AWS Nuke command to delete resources as described in the **Usage** section.
 
 ---
 
