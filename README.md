@@ -21,7 +21,6 @@ It is recommended to only use AWS Nuke on **development** or **test** accounts w
 - [Destroy Resources](#destroy-resources)
 - [Safety Considerations](#safety-considerations)
 - [Contributing](#contributing)
-- [License](#license)
 
 ---
 
@@ -215,20 +214,7 @@ To delete all resources in your AWS account:
 
 ## **Contributing**
 
-AWS Nuke is an open-source project, and contributions are welcome! If you find bugs, want to add features, or make improvements, please follow these steps:
-
-1. Fork the repository.
-2. Create a new branch for your changes.
-3. Implement the changes and write tests if necessary.
-4. Submit a pull request with a description of your changes.
-
-For more detailed contribution guidelines, check out the repository’s [CONTRIBUTING.md](CONTRIBUTING.md) file.
-
----
-
-## **License**
-
-AWS Nuke is licensed under the **MIT License**. See [LICENSE](LICENSE) for more details.
+AWS Nuke is an open-source project, and contributions are welcome! If you find bugs, want to add features, or make improvements, 
 
 ---
 
