@@ -1,4 +1,4 @@
-Certainly! Below is an example of how you might write a **project importance statement** along with **documentation** for the **AWS Nuke** project.
+ **project importance statement** along with **documentation** for the **AWS Nuke** project.
 
 ---
 
