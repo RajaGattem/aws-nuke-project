@@ -1,5 +1,3 @@
- **project importance statement** along with **documentation** for the **AWS Nuke** project.
-
 ---
 
 # AWS Nuke Project: Importance and Documentation
