@@ -1,5 +1,3 @@
-Here's an example of how to structure the **README** file for the **AWS Nuke** project on GitHub. This version includes installation instructions, usage guidelines, safety warnings, and configuration steps, written in a clear and structured way.
-
 ---
 
 # AWS Nuke
