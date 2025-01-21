@@ -101,8 +101,26 @@ To modify the `config.yaml` file using `vim`, follow these steps:
    ```bash
    vim config.yaml
    ```
-```
 
+### Sample `config.yaml`:
+```yaml
+regions:
+  - "ap-south-1"
+  - "global"  # Resources like IAM, CloudFront, etc.
+account-blocklist:
+  - 123456789101  # Exclude specific accounts (e.g., production accounts).
+resource-types:
+  excludes:
+    - IAMUser
+    - IAMGroup
+    - IAMPolicy
+    - IAMRole
+    - IAMInstanceProfile
+accounts:
+  "<ACCOUNT_ID>": {}  # Replace with the actual AWS account ID
+
+   
+```
 #### Key Sections:
 - **regions**: Specifies which AWS regions to target for resource deletion.
 - **account-blocklist**: A list of AWS account IDs to exclude from deletion (for safety).
